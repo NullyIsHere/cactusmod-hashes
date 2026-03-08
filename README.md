@@ -1,5 +1,10 @@
-Hashes used by Spine to detect infected cactusmod jars.
+Hashes used by Spine to detect infected CactusMod JARs.
 
-Whitelist: never flag
-Blacklist: ALWAYS flag
-in neither: use the other logic to detect it
+Whitelist
+Hashes that are known to be safe. Never flag these.
+
+Blacklist
+Hashes that are known to be malicious. Always flag these.
+
+Unknown
+If a hash appears in neither list, Spine falls back to its other detection logic.
