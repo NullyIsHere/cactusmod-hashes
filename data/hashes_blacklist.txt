@@ -1,2 +1,2 @@
 #HASH|VERSION|COMMENTS
-# Lines starting with # are comments
+# Lines starting with # are comments.
