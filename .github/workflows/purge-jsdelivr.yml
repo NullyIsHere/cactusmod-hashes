@@ -1,0 +1,30 @@
+name: Purge jsDelivr Cache
+
+on:
+  push:
+    paths:
+      - "data/**"
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Get changed files in data/
+        id: changed
+        run: |
+          files=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^data/' || true)
+          echo "files=$files" >> $GITHUB_OUTPUT
+
+      - name: Purge jsDelivr cache
+        if: steps.changed.outputs.files != ''
+        run: |
+          for file in ${{ steps.changed.outputs.files }}
+          do
+            url="https://purge.jsdelivr.net/gh/${{ github.repository }}/$file"
+            echo "Purging $url"
+            curl -s "$url"
+          done
